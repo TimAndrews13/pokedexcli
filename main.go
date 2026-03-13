@@ -9,6 +9,7 @@ import (
 func main() {
 	//Craete bufio.Scanner reading from os.Stdin
 	scanner := bufio.NewScanner(os.Stdin)
+	cfg := config{}
 
 	//infinite for loop; execute once for every command user inputs
 	for {
@@ -19,7 +20,7 @@ func main() {
 			commands := getCommands()
 			//check input against supportedCommands map (found in repl.go)
 			if _, ok := commands[input]; ok {
-				commands[input].callback()
+				commands[input].callback(&cfg)
 			} else {
 				fmt.Println("Unknown command")
 			}
