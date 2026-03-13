@@ -23,10 +23,17 @@ func main() {
 
 		for scanner.Scan() {
 			input := scanner.Text()
+			words := cleanInput(input)
+			command := words[0]
+			arg := ""
+			if len(words) > 1 {
+				arg = words[1]
+			}
+
 			commands := getCommands()
 			//check input against supportedCommands map (found in repl.go)
-			if _, ok := commands[input]; ok {
-				commands[input].callback(&cfg)
+			if _, ok := commands[command]; ok {
+				commands[command].callback(&cfg, arg)
 			} else {
 				fmt.Println("Unknown command")
 			}

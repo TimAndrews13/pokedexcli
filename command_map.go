@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func commandMap(cfg *config) error {
+func commandMap(cfg *config, s string) error {
 	var url string
 	if cfg.Next == nil {
 		url = "https://pokeapi.co/api/v2/location-area/"
@@ -26,7 +26,7 @@ func commandMap(cfg *config) error {
 
 		data, err = io.ReadAll(res.Body)
 		if err != nil {
-			return fmt.Errorf("Error Reading Return from Locaiton-Area API Endpoint: %w", err)
+			return fmt.Errorf("Error Reading Return from Location-Area API Endpoint: %w", err)
 		}
 
 		cfg.Cache.Add(url, data)
@@ -48,7 +48,7 @@ func commandMap(cfg *config) error {
 	return nil
 }
 
-func commandMapB(cfg *config) error {
+func commandMapB(cfg *config, s string) error {
 	var url string
 	if cfg.Previous == nil {
 		fmt.Println("You Are on the First Page of Location-Areas\nTry Using map")
