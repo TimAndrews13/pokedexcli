@@ -45,7 +45,7 @@ func commandCatch(cfg *config, pokemonName string) error {
 	caught := randomNum < 20
 
 	if caught {
-		fmt.Printf("%s was caught!\n", name)
+		fmt.Printf("%s was caught!\nYou may now inspect it with the inspect command.\n", name)
 		cfg.Pokedex[name] = pokemon
 		return nil
 	} else {
