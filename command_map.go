@@ -15,15 +15,21 @@ func commandMap(cfg *config) error {
 		url = *cfg.Next
 	}
 
-	res, err := http.Get(url)
-	if err != nil {
-		return fmt.Errorf("Error Calling Location-Area API Endpoint: %w", err)
-	}
-	defer res.Body.Close()
+	data, ok := cfg.Cache.Get(url)
 
-	data, err := io.ReadAll(res.Body)
-	if err != nil {
-		return fmt.Errorf("Error Reading Return from Location-Area API Endpoint: %w", err)
+	if !ok {
+		res, err := http.Get(url)
+		if err != nil {
+			return fmt.Errorf("Error Calling Location-Area API Endpoint: %w", err)
+		}
+		defer res.Body.Close()
+
+		data, err = io.ReadAll(res.Body)
+		if err != nil {
+			return fmt.Errorf("Error Reading Return from Locaiton-Area API Endpoint: %w", err)
+		}
+
+		cfg.Cache.Add(url, data)
 	}
 
 	var respShallowLocation RespShallowLocations
@@ -51,15 +57,21 @@ func commandMapB(cfg *config) error {
 		url = *cfg.Previous
 	}
 
-	res, err := http.Get(url)
-	if err != nil {
-		return fmt.Errorf("Error Calling Location-Area API Endpoint: %w", err)
-	}
-	defer res.Body.Close()
+	data, ok := cfg.Cache.Get(url)
 
-	data, err := io.ReadAll(res.Body)
-	if err != nil {
-		return fmt.Errorf("Error Reading Return from Location-Area API Endpoint: %w", err)
+	if !ok {
+		res, err := http.Get(url)
+		if err != nil {
+			return fmt.Errorf("Error Calling Location-Area API Endpoint: %w", err)
+		}
+		defer res.Body.Close()
+
+		data, err = io.ReadAll(res.Body)
+		if err != nil {
+			return fmt.Errorf("Error Reading Return from Locaiton-Area API Endpoint: %w", err)
+		}
+
+		cfg.Cache.Add(url, data)
 	}
 
 	var respShallowLocation RespShallowLocations

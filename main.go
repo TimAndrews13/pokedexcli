@@ -4,12 +4,18 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"time"
+
+	"github.com/timandrews/pokedexcli/internal/pokecache"
 )
 
 func main() {
 	//Craete bufio.Scanner reading from os.Stdin
 	scanner := bufio.NewScanner(os.Stdin)
-	cfg := config{}
+	cache := pokecache.NewCache(5 * time.Second)
+	cfg := config{
+		Cache: cache,
+	}
 
 	//infinite for loop; execute once for every command user inputs
 	for {

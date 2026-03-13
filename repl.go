@@ -2,6 +2,8 @@ package main
 
 import (
 	"strings"
+
+	"github.com/timandrews/pokedexcli/internal/pokecache"
 )
 
 type cliCommand struct {
@@ -13,6 +15,7 @@ type cliCommand struct {
 type config struct {
 	Next     *string
 	Previous *string
+	Cache    *pokecache.Cache
 }
 
 func getCommands() map[string]cliCommand {
