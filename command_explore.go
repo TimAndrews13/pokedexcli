@@ -26,14 +26,14 @@ func commandExplore(cfg *config, area string) error {
 
 		cfg.Cache.Add(url, data)
 	}
-	//Unmarshal JSON Respons
+	//Unmarshal JSON Response
 	var locationDetail LocationDetail
 	if err := json.Unmarshal(data, &locationDetail); err != nil {
 		fmt.Printf("Not a valid Location-Area\nTry Again\n")
 		return err
 	}
 
-	fmt.Printf("Exploring %s...\n", area)
+	fmt.Printf("Exploring %s... \n", area)
 
 	for _, encounter := range locationDetail.PokemonEncounters {
 		fmt.Printf(" - %s\n", encounter.Pokemon.Name)

@@ -13,8 +13,10 @@ func main() {
 	//Craete bufio.Scanner reading from os.Stdin
 	scanner := bufio.NewScanner(os.Stdin)
 	cache := pokecache.NewCache(5 * time.Second)
+	pokedex := make(map[string]Pokemon)
 	cfg := config{
-		Cache: cache,
+		Cache:   cache,
+		Pokedex: pokedex,
 	}
 
 	//infinite for loop; execute once for every command user inputs

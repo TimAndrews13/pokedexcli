@@ -16,6 +16,7 @@ type config struct {
 	Next     *string
 	Previous *string
 	Cache    *pokecache.Cache
+	Pokedex  map[string]Pokemon
 }
 
 func getCommands() map[string]cliCommand {
@@ -44,6 +45,11 @@ func getCommands() map[string]cliCommand {
 			name:        "explore",
 			description: "Explores Location-Area and Displays Pokemon from Location-Area",
 			callback:    commandExplore,
+		},
+		"catch": {
+			name:        "catch",
+			description: "Attempts to Catch a Pokemon",
+			callback:    commandCatch,
 		},
 	}
 
